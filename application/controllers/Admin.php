@@ -65,15 +65,12 @@ class Admin extends CI_Controller
                         $this->load->view('blog');
                     }
                 }
-                else
-                    {
-                    $data = array(
-                        'error_message' => 'Invalid Username or Password'
-                    );
-                    $this->load->view('no');
-                    }
-
             }
+            else
+            {
+                $this->load->view('no');
+            }
+
         }
     }
 
