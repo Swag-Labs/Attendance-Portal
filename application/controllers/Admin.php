@@ -48,8 +48,8 @@ class Admin extends CI_Controller
                 $result = $this->user_model->read_user_information($email);
                 if ($result != false) {
                     $resultat = $this->user_model->attendance($email);
-                    if ($resultat != false ) {
-                        foreach ($resultat as $row)
+                    if ($resultat['tandf'] != false ) {
+                        foreach ($resultat['records'] as $row)
                         {
                             $id = $row['id'];
                             $employee_id = $row['employee_id'];
@@ -58,19 +58,31 @@ class Admin extends CI_Controller
                             'id' => $id,
                             'employee_id' => $employee_id
                         );
-
                         $this->session->set_userdata($newdata);
                         $this->load->view('final');
                     } else {
+                         foreach ($resultat['records'] as $row)
+                        {
+                            $id = $row['id'];
+                            $employee_id = $row['employee_id'];
+                        }
+                        $newdata = array(
+                            'id' => $id,
+                            'employee_id' => $employee_id
+                        );
+                        $this->session->set_userdata($newdata);
                         $this->load->view('blog');
                     }
                 }
-            }
-            else
-            {
-                $this->load->view('no');
-            }
+                else
+                    {
+                    $data = array(
+                        'error_message' => 'Invalid Username or Password'
+                    );
+                    $this->load->view('no');
+                    }
 
+            }
         }
     }
 

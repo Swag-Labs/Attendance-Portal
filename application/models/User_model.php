@@ -103,9 +103,22 @@ class User_model extends CI_Model
                 $this->db->order_by("id","desc");
                 $this->db->limit(1);
                 $query = $this->db->get();
-                return $query->result_array();
+                return array(
+                     'records' => $query->result_array(),
+                      'tandf' => TRUE,
+                );
             } else {
-                return false;
+                $condition = "employee_id =" . "'" . $id . "'";
+                $this->db->select('*');
+                $this->db->from('user_attandance');
+                $this->db->where($condition);
+                $this->db->order_by("id","desc");
+                $this->db->limit(1);
+                $query = $this->db->get();
+               return array(
+                     'records' => $query->result_array(),
+                      'tandf' => FALSE,
+                );
             }
         }
         else{
