@@ -25,7 +25,8 @@ CREATE TABLE IF NOT EXISTS `user_attandance` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `employee_id` bigint(20)  NOT NULL,
   `create_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
-  `count` int(10) NOT NULL DEFAULT 0,
+  `logout_time` TIMESTAMP DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `count` int(10) NOT NULL DEFAULT 1,
   KEY `employee_id` (`employee_id`),
   CONSTRAINT `employee_id` FOREIGN KEY (`employee_id`) REFERENCES `employee` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   PRIMARY KEY (id)
